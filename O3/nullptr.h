@@ -9,6 +9,9 @@ namespace o3 {
     public:
         typedef nullptr_t this_type;
         
+        nullptr_t()
+            : padding_(0) { }
+        
         template <typename Ty>
         operator Ty *() const {
             return 0;
@@ -34,7 +37,7 @@ namespace o3 {
         }
         
     private:
-        void volatile *padding_;
+        void *padding_;
     }; // END of class nullptr_t
 } // END of namespace o3
 
