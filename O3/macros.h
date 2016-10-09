@@ -53,5 +53,13 @@
 #define O3_DETAIL_GLUE(a, b)     a##b
 #define O3_GLUE(a, b)            O3_DETAIL_GLUE(a, b)
 #define O3_SELF                  (*this)
+#define O3_IN
+#define O3_OUT
+#define O3_INOUT
+#define O3_IN_OPT
+#define O3_OUT_OPT
+#define O3_INOUT_OPT
+#define O3_RET_NOTNULL
+#define O3_CHECKRETURN
 
 #endif //O3LIB_MACROS_H

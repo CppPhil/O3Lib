@@ -2,7 +2,14 @@
 #include "Catch/Catch.hpp"
 #include "O3/algorithm.h"
 #include "O3/assert.h"
+#include "O3/iterator.h"
 #include <deque>
+
+namespace app {
+    int f(int i, int j) {
+        return i * j;
+    }
+}
 
 SCENARIO("elements can be added to containers", "o3::push_back, push_front, insert") {
     GIVEN("A deque of ints") {
