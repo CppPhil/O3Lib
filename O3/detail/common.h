@@ -2,9 +2,12 @@
 #define O3LIB_COMMON_H
 
 // include macros for compiler detection
-#include "compiler_detection.h
+#include "compiler_detection.h"
 
 // include ciso646 so that standard C++ alternative operators are available even on MSVC
 #include <ciso646>
+
+typedef signed char byte;
+typedef unsigned char ubyte;
 
 #endif //O3LIB_COMMON_H

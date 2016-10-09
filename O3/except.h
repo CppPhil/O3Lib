@@ -1,29 +1,34 @@
 #ifndef O3LIB_EXCEPT_H
 #define O3LIB_EXCEPT_H
-
 #include "detail/common.h"
 #include "macros.h"
 #include <exception>
 #include <stdexcept>
 #include <string>
 
-namespace o3 {
-    class nullpointer_exception
-            : public std::logic_error {
-    public:
-        typedef nullpointer_exception this_type;
-        typedef std::logic_error base_type;
-        
-        explicit nullpointer_exception(std::string const &what_arg)
-            : base_type(what_arg) { }
-        
-        explicit nullpointer_exception(char const *what_arg)
-            : base_type(what_arg) { }
+#define O3_DECLARE_EXCEPTION_TYPE(identifier, base_class) \
+    class identifier \
+        : public base_class { \
+    public: \
+        typedef identifier this_type; \
+        typedef base_class base_type; \
+        \
+        explicit identifier(std::string const &what_arg) \
+            : base_type(what_arg) { } \
+        explicit identifier(char const *what_arg) \
+            : base_type(what_arg) { } \
+        \
+        virtual char const *what() const O3_NOEXCEPT { \
+            return base_type::what(); \
+        } \
+    }
 
-        virtual char const *what() const O3_NOEXCEPT {
-            return base_type::what();
-        }
-    }; // END of class nullpointer_exeption
+namespace o3 {
+    O3_DECLARE_EXCEPTION_TYPE(nullpointer_exception, std::logic_error);
+    O3_DECLARE_EXCEPTION_TYPE(assertion_violation, std::runtime_error);
+    O3_DECLARE_EXCEPTION_TYPE(precondition_violation, assertion_violation);
+    O3_DECLARE_EXCEPTION_TYPE(postcondition_violation, assertion_violation);
+    O3_DECLARE_EXCEPTION_TYPE(bad_index, std::out_of_range);
 } // END of namespace o3
 
 #endif //O3LIB_EXCEPT_H

@@ -1,8 +1,8 @@
 #ifndef O3LIB_TYPE_TRAITS_H
 #define O3LIB_TYPE_TRAITS_H
-
 #include "detail/common.h"
 #include "macros.h"
+#include "nullptr.h"
 #include <cstddef>
 
 namespace o3 {
@@ -38,6 +38,31 @@ namespace o3 {
     template <class Ty>
     struct add_cv {
         typedef const volatile Ty type;
+    };
+    
+    template <class Ty>
+    struct add_lvalue_reference {
+        typedef Ty &type;
+    };
+    
+    template <class Ty>
+    struct add_reference {
+        typedef typename add_lvalue_reference<Ty>::type type;
+    };
+    
+    template <class Ty>
+    struct remove_reference {
+        typedef Ty type;
+    };
+    
+    template <class Ty>
+    struct remove_reference<Ty &> {
+        typedef Ty type;
+    };
+    
+    template <class Ty>
+    struct add_pointer {
+        typedef typename remove_reference<Ty>::type *type;
     };
     
     template <class Ty>
@@ -100,6 +125,26 @@ namespace o3 {
         typedef Ty type;
     };
     
+    template <class Ty>
+    struct remove_pointer<Ty *> {
+        typedef Ty type;
+    };
+    
+    template <class Ty>
+    struct remove_pointer<Ty * const> {
+        typedef Ty type;
+    };
+    
+    template <class Ty>
+    struct remove_pointer<Ty * volatile> {
+        typedef Ty type;
+    };
+    
+    template <class Ty>
+    struct remove_pointer<Ty * const volatile> {
+        typedef Ty type;
+    };
+    
     template <class Ty1, class Ty2>
     struct is_same : false_type { };
     
@@ -137,21 +182,111 @@ namespace o3 {
     struct is_void : is_same<void, typename remove_cv<Ty>::type> { };
     
     template <class Ty>
+    struct is_null_pointer : is_same<nullptr_t, typename remove_cv<Ty>::type>{ };
+    
+    template <class Ty>
+    struct is_integral
+        : integral_constant<bool,
+                is_same<bool, typename remove_cv<Ty>::type>::value ||
+                is_same<char, typename remove_cv<Ty>::type>::value ||
+                is_same<signed char, typename remove_cv<Ty>::type>::value ||
+                is_same<unsigned char, typename remove_cv<Ty>::type>::value ||
+                is_same<char16_t, typename remove_cv<Ty>::type>::value ||
+                is_same<char32_t, typename remove_cv<Ty>::type>::value ||
+                is_same<wchar_t, typename remove_cv<Ty>::type>::value ||
+                is_same<short, typename remove_cv<Ty>::type>::value ||
+                is_same<unsigned short, typename remove_cv<Ty>::type>::value ||
+                is_same<int, typename remove_cv<Ty>::type>::value ||
+                is_same<unsigned, typename remove_cv<Ty>::type>::value ||
+                is_same<long, typename remove_cv<Ty>::type>::value ||
+                is_same<unsigned long, typename remove_cv<Ty>::type>::value ||
+                is_same<long long, typename remove_cv<Ty>::type>::value ||
+                is_same<unsigned long long, typename remove_cv<Ty>::type>::value> { };
+        
+    template <class Ty>
     struct is_floating_point
         : integral_constant<bool,
                 is_same<float, typename remove_cv<Ty>::type>::value ||
-                is_same<double, typename remove_cv<Ty>::type>::value> { };
+                is_same<double, typename remove_cv<Ty>::type>::value ||
+                is_same<long double, typename remove_cv<Ty>::type>::value> { };
+    
+    template <class Ty>
+    struct is_arithmetic
+        : integral_constant<bool,
+                is_integral<Ty>::value ||
+                is_floating_point<Ty>::value> { };
+    
+    template <class Ty>
+    struct is_fundamental
+        : integral_constant<bool,
+                is_arithmetic<Ty>::value ||
+                is_void<Ty>::value ||
+                is_null_pointer<Ty>::value> { };
+    
+    template <class Ty>
+    struct is_compound
+        : integral_constant<bool, !is_fundamental<Ty>::value> { };
     
     namespace detail {
+        template <class Ty>
+        char is_class_helper(int Ty:: *);
+        
+        struct two_bytes {
+            char buf[2];
+        };
+        
+        template <class Ty>
+        two_bytes is_class_helper(...);
+        
+        template <class Ty>
+        struct is_member_pointer_helper : false_type { };
+        
+        template <class Ty, class Ty2>
+        struct is_member_pointer_helper<Ty Ty2:: *> : true_type { };
+        
         template <class Ty>
         struct is_pointer_helper : false_type { };
         
         template <class Ty>
         struct is_pointer_helper<Ty *> : true_type { };
+   
+        template <typename Ty,
+                  bool = is_arithmetic<Ty>::value>
+        struct is_signed_helper
+            : integral_constant<bool,
+                    Ty(-1) < Ty(0)> { };
+        
+        template <typename Ty>
+        struct is_signed_helper<Ty, false> : false_type { };
+    
+        template <typename Ty,
+                  bool = is_arithmetic<Ty>::value>
+        struct is_unsigned_helper
+            : integral_constant<bool,
+                    Ty(0) < Ty(-1)> { };
+        
+        template <typename Ty>
+        struct is_unsigned_helper<Ty, false> : false_type { };
     } // END of namespace detail
    
+    template <typename Ty>
+    struct is_unsigned
+        : typename detail::is_unsigned_helper<Ty>::type { };
+    
+    template <typename Ty>
+    struct is_signed
+        : typename detail::is_signed_helper<Ty>::type { };
+    
     template <class Ty>
     struct is_pointer : detail::is_pointer_helper<typename remove_cv<Ty>::type> { };
+    
+    template <class Ty>
+    struct is_class : integral_constant<bool,
+            sizeof(detail::is_class_helper<Ty>(O3_NULLPTR)) == 1>{ };
+    
+    template <class Ty>
+    struct is_member_pointer
+        : detail::is_member_pointer_helper<typename remove_cv<Ty>::type> { };
     
     template <class Ty>
     struct rank : integral_constant<std::size_t, 0> { };
@@ -170,6 +305,14 @@ namespace o3 {
         typedef Ty type;
     };
     
+    template <bool Bool, class Ty = void>
+    struct disable_if {
+        typedef Ty type;
+    };
+    
+    template <class Ty>
+    struct disable_if<true, Ty> { };
+    
     template <bool Bool, class True, class False>
     struct conditional {
         typedef True type;
@@ -183,6 +326,122 @@ namespace o3 {
     template <class Ty>
     struct identity {
         typedef Ty type;
+    };
+    
+    template <class Ty>
+    struct make_signed;
+    
+    template <>
+    struct make_signed<signed char> {
+        typedef signed char type;
+    };
+    
+    template <>
+    struct make_signed<unsigned char> {
+        typedef signed char type;
+    };
+    
+    template <>
+    struct make_signed<char> {
+        typedef signed char type;
+    };
+    
+    template <>
+    struct make_signed<short> {
+        typedef short type;
+    };
+    
+    template <>
+    struct make_signed<unsigned short> {
+        typedef short type;
+    };
+    
+    template <>
+    struct make_signed<int> {
+        typedef int type;
+    };
+    
+    template <>
+    struct make_signed<unsigned> {
+        typedef int type;
+    };
+    
+    template <>
+    struct make_signed<long> {
+        typedef long type;
+    };
+    
+    template <>
+    struct make_signed<unsigned long> {
+        typedef long type;
+    };
+    
+    template <>
+    struct make_signed<long long> {
+        typedef long long type;
+    };
+    
+    template <>
+    struct make_signed<unsigned long long> {
+        typedef long long type;
+    };
+    
+    template <typename Ty>
+    struct make_unsigned;
+    
+    template <>
+    struct make_unsigned<char> {
+        typedef unsigned char type;
+    };
+    
+    template <>
+    struct make_unsigned<signed char> {
+        typedef unsigned char type;
+    };
+    
+    template <>
+    struct make_unsigned<unsigned char> {
+        typedef unsigned char type;
+    };
+    
+    template <>
+    struct make_unsigned<short> {
+        typedef unsigned short type;
+    };
+    
+    template <>
+    struct make_unsigned<unsigned short> {
+        typedef unsigned short type;
+    };
+    
+    template <>
+    struct make_unsigned<int> {
+        typedef unsigned type;
+    };
+    
+    template <>
+    struct make_unsigned<unsigned> {
+        typedef unsigned type;
+    };
+    
+    template <>
+    struct make_unsigned<long> {
+        typedef unsigned long type;
+    };
+    
+    template <>
+    struct make_unsigned<unsigned long> {
+        typedef unsigned long type;
+    };
+    
+    template <>
+    struct make_unsigned<long long> {
+        typedef unsigned long long type;
+    };
+    
+    template <>
+    struct make_unsigned<unsigned long long> {
+        typedef unsigned long long type;
     };
 } // END of namespace o3
 

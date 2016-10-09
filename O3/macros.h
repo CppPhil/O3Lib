@@ -1,6 +1,5 @@
 #ifndef O3LIB_MACROS_H
 #define O3LIB_MACROS_H
-
 #include "detail/common.h"
 
 #if O3_COMPILER == O3_COMPILER_CLANG
@@ -41,8 +40,18 @@
 #    define O3_NOEXCEPT          throw()
 #endif
 
+#undef O3_HAS_NOEXCEPT
+
+#define O3_DETAIL_BEGIN_MACRO    do {
+#define O3_DETAIL_END_MACRO      } while (false)
+
 #define O3_UNUSED(param)         (static_cast<void>((param)))
 #define O3_MAX(a, b)             (((a) > (b)) ? (a) : (b))
 #define O3_MIN(a, b)             (((a) < (b)) ? (a) : (b))
+#define O3_DETAIL_STRINGIFY(x)   #x
+#define O3_STRINGIFY(x)          O3_DETAIL_STRINGIFY(x)
+#define O3_DETAIL_GLUE(a, b)     a##b
+#define O3_GLUE(a, b)            O3_DETAIL_GLUE(a, b)
+#define O3_SELF                  (*this)
 
 #endif //O3LIB_MACROS_H

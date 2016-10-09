@@ -1,6 +1,5 @@
 #ifndef O3LIB_NULLPTR_H
 #define O3LIB_NULLPTR_H
-
 #include "detail/common.h"
 #include <cstddef>
 

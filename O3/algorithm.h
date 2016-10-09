@@ -167,6 +167,21 @@ namespace o3 {
         return first;
     }
     
+    template <typename RandomAccessIterator>
+    std::pair<RandomAccessIterator, RandomAccessIterator> slide(RandomAccessIterator const &first,
+                                                                RandomAccessIterator const &last,
+                                                                RandomAccessIterator const &place) {
+        if (place < first) {
+            return std::make_pair(place, rotate(place, first, last));
+        }
+        
+        if (last < place) {
+            return std::make_pair(rotate(first, last, place), place);
+        }
+        
+        return std::make_pair(first, last);
+    }
+    
     template <typename Ty, typename Compare>
     Ty const &clamp(Ty const &v, Ty const &lo, Ty const &hi, Compare comp) {
         return assert(!comp(hi, lo)),

@@ -1,6 +1,5 @@
 #ifndef O3LIB_MEMORY_H
 #define O3LIB_MEMORY_H
-
 #include "detail/common.h"
 #include "nullptr.h"
 #include "except.h"
@@ -24,21 +23,21 @@ namespace o3 {
                 delete[] p;
             }
         };
-        
     } // END of namespace mem_free
     
-    template <typename Ty, typename Deleter = mem_free::simple_deleter>
+    template <typename Ty>
     class scoped_ptr {
     public:
         typedef scoped_ptr this_type;
         typedef Ty element_type;
-        typedef Deleter deleter_type;
+        typedef mem_free::simple_deleter deleter_type;
         
         explicit scoped_ptr(element_type *p = O3_NULLPTR)
             : p_(p) { }
         
         ~scoped_ptr() {
             deleter_type::free(p_);
+            p_ = O3_NULLPTR;
         }
         
         void reset(element_type *p = O3_NULLPTR) {
@@ -110,8 +109,8 @@ namespace o3 {
     private:
         element_type *p_;
         
-        scoped_ptr(scoped_ptr const &);
-        scoped_ptr &operator=(scoped_ptr const &);
+        scoped_ptr(this_type const &);
+        this_type &operator=(this_type const &);
     }; // END of class scoped_ptr
     
     template <typename Ty>
@@ -119,6 +118,99 @@ namespace o3 {
         arg1.swap(arg2);
     }
     
+    template <typename Ty>
+    class scoped_array {
+    public:
+        typedef scoped_array this_type;
+        typedef Ty element_type;
+        typedef mem_free::array_deleter deleter_type;
+    
+        explicit scoped_array(element_type *p = O3_NULLPTR)
+                : p_(p) { }
+    
+        ~scoped_array() {
+            deleter_type::free(p_);
+            p_ = O3_NULLPTR;
+        }
+    
+        void reset(element_type *p = O3_NULLPTR) {
+            if (p != p_) {
+                deleter_type::free(p_);
+            }
+        
+            p_ = p;
+        }
+    
+        element_type &operator*() const {
+            if (p_ == O3_NULLPTR) {
+                throw nullpointer_exception("attempted to dereference a nullpointer in o3::scoped_array::operator*");
+            }
+            return *p_;
+        }
+    
+        element_type *operator->() const {
+            if (p_ == O3_NULLPTR) {
+                throw nullpointer_exception("attempted to derefenece a nullpointer in o3::scoped_array::operator->");
+            }
+            return p_;
+        }
+    
+        element_type *get() const O3_NOEXCEPT {
+            return p_;
+        }
+    
+        element_type *release() O3_NOEXCEPT {
+            element_type *p = p_;
+            p_ = O3_NULLPTR;
+            return p;
+        }
+    
+        operator void *() const O3_NOEXCEPT {
+            return p_;
+        }
+    
+        void swap(this_type &other) O3_NOEXCEPT {
+            element_type *t = other.p_;
+            other.p_ = p_;
+            p_ = t;
+        }
+    
+        friend bool operator==(this_type const &ptr, nullptr_t const &) O3_NOEXCEPT {
+            return ptr.get() == O3_NULLPTR;
+        }
+    
+        friend bool operator==(nullptr_t const &, this_type const &ptr) O3_NOEXCEPT {
+            return ptr.get() == O3_NULLPTR;
+        }
+    
+        friend bool operator!=(this_type const &ptr, nullptr_t const &) O3_NOEXCEPT {
+            return ptr.get() != O3_NULLPTR;
+        }
+    
+        friend bool operator!=(nullptr_t const &, this_type const &ptr) O3_NOEXCEPT {
+            return ptr.get() != O3_NULLPTR;
+        }
+    
+        friend bool operator==(this_type const &arg1, this_type const &arg2) O3_NOEXCEPT {
+            return arg1.get() == arg2.get();
+        }
+    
+        friend bool operator!=(this_type const &arg1, this_type const &arg2) O3_NOEXCEPT {
+            return !(arg1 == arg2);
+        }
+
+    private:
+        element_type *p_;
+    
+        scoped_array(this_type const &);
+        this_type &operator=(this_type const &);
+    }; // END of class scoped_array
+
+    template <typename Ty>
+    O3_FORCE_INLINE void swap(scoped_array<Ty> &arg1, scoped_array<Ty> &arg2) {
+        arg1.swap(arg2);
+    }
+        
     template <typename Ty>
     struct auto_ptr_ref {
         explicit auto_ptr_ref(Ty *p)
