@@ -2,7 +2,15 @@
 #include "Catch/Catch.hpp"
 #include "O3/algorithm.h"
 #include "O3/assert.h"
+#include "O3/containers.h"
+#include "O3/except.h"
+#include "O3/final_act.h"
+#include "O3/functional.h"
 #include "O3/iterator.h"
+#include "O3/macros.h"
+#include "O3/noncopyable.h"
+#include "O3/nullptr.h"
+#include "O3/type_traits.h"
 #include <deque>
 
 namespace app {

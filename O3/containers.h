@@ -90,14 +90,14 @@ namespace o3 {
         
         reference at(size_type i) {
             if (i >= Num) {
-                throw bad_index("bad index in function: " __FUNCTION__);
+                throw bad_index("bad index in function: o3::array::at (non-const)");
             }
             return elems[i];
         }
         
         const_reference at(size_type i) const {
             if (i >= Num) {
-                throw bad_index("bad index in function: " __FUNCTION__);
+                throw bad_index("bad index in function: o3::array::at (const)");
             }
             return elems[i];
         }
