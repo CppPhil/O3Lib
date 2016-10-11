@@ -1,9 +1,11 @@
 #ifndef O3LIB_FINAL_ACT_H
 #define O3LIB_FINAL_ACT_H
-#include "detail/common.h"
+#include "noncopyable.h"
+#include "common.h"
 #include "macros.h"
 
 namespace o3 {
+    //! ad-hoc RAII wrapper that can be created from any callable; will call the callable in its destructor.
     template <typename Callable>
     class final_act {
     public:
@@ -18,8 +20,7 @@ namespace o3 {
         }
         
     private:
-        final_act(this_type const &);
-        this_type &operator=(this_type const &);
+        O3_DECLARE_NONCOPYABLE(final_act);
         
         element_type callable_;
     };

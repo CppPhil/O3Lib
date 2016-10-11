@@ -1,6 +1,6 @@
 #ifndef O3LIB_ITERATOR_H
 #define O3LIB_ITERATOR_H
-#include "detail/common.h"
+#include "common.h"
 #include "macros.h"
 #include <cstddef>
 #include <iterator>

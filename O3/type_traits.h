@@ -1,6 +1,6 @@
 #ifndef O3LIB_TYPE_TRAITS_H
 #define O3LIB_TYPE_TRAITS_H
-#include "detail/common.h"
+#include "common.h"
 #include "macros.h"
 #include "nullptr.h"
 #include <cstddef>

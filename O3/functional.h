@@ -1,9 +1,10 @@
 #ifndef O3LIB_FUNCTIONAL_H
 #define O3LIB_FUNCTIONAL_H
-#include "detail/common.h"
+#include "common.h"
 #include <functional>
 
 namespace o3 {
+    //! http://en.cppreference.com/w/cpp/utility/functional/bit_and
     template <typename Ty>
     struct bit_and {
         Ty operator()(Ty const &a, Ty const &b) const {
@@ -11,6 +12,7 @@ namespace o3 {
         }
     };
     
+    //! http://en.cppreference.com/w/cpp/utility/functional/bit_or
     template <typename Ty>
     struct bit_or {
         Ty operator()(Ty const &a, Ty const &b) const {
@@ -18,6 +20,7 @@ namespace o3 {
         }
     };
     
+    //! functor that applies the bit_xor operator (^) to a and b like so: a ^ b
     template <typename Ty>
     struct bit_xor {
         Ty operator()(Ty const &a, Ty const &b) const {

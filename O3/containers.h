@@ -1,24 +1,28 @@
 #ifndef O3LIB_CONTAINERS_H
 #define O3LIB_CONTAINERS_H
-#include "detail/common.h"
+#include "common.h"
 #include "except.h"
-#ifdef O3_USE_HASH_CONTAINERS
+
+//! define O3_NO_HASH_CONTAINERS to not have the unordered_map and unordered_set headers included
+#ifndef O3_NO_HASH_CONTAINERS
 #   include <unordered_map>
 #   include <unordered_set>
-#endif // O3_USE_HASH_CONTAINERS
+#endif // O3_NO_HASH_CONTAINERS
 #include <cstddef>
 #include <iterator>
 #include <utility>
 #include <algorithm>
 
 namespace o3 {
-#ifdef O3_USE_HASH_CONTAINERS
+//! define O3_NO_HASH_CONTAINERS to not have the unordered_map and unordered_set headers included
+#ifndef O3_NO_HASH_CONTAINERS
     using ::std::tr1::unordered_set;
     using ::std::tr1::unordered_multiset;
     using ::std::tr1::unordered_map;
     using ::std::tr1::unordered_multimap;
-#endif // O3_USE_HASH_CONTAINERS
+#endif // O3_NO_HASH_CONTAINERS
     
+    //! much like C++11s std::array; see: http://en.cppreference.com/w/cpp/container/array
     template <typename Ty, std::size_t Num>
     class array {
     public:
@@ -144,6 +148,7 @@ namespace o3 {
             return elems;
         }
         
+        //! returns a pointer with low level constness to the internal c-array
         value_type const *const_data() const {
             return elems;
         }
@@ -154,6 +159,7 @@ namespace o3 {
             return *this;
         }
         
+        //! an alias for fill
         void assign(value_type const &v) {
             fill(v);
         }
@@ -162,6 +168,7 @@ namespace o3 {
             std::fill_n(begin(), size(), v);
         }
                 
+        //! the underlying c-array is publicly accessible for direct access
         value_type elems[Num];
     }; // END of class array
     

@@ -7,7 +7,10 @@
 // include ciso646 so that standard C++ alternative operators are available even on MSVC
 #include <ciso646>
 
+//! a signed byte-sized type
 typedef signed char byte;
+
+//! an unsigned byte-sized type
 typedef unsigned char ubyte;
 
 #endif //O3LIB_COMMON_H

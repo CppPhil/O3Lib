@@ -1,23 +1,30 @@
 #ifndef O3LIB_MEMORY_H
 #define O3LIB_MEMORY_H
-#include "detail/common.h"
+#include "common.h"
 #include "nullptr.h"
 #include "except.h"
+#include "noncopyable.h"
 #include <new>
 #include <memory>
 
 namespace o3 {
     namespace mem_free {
+        //! frees memory allocated with plain new
         class simple_deleter {
         public:
+    
+            //! frees memory by calling delete on the pointer passed in
             template <typename Ty>
             static void free(Ty *p) O3_NOEXCEPT {
                 delete p;
             }
         };
         
+        //! frees memory allocated with new[]
         class array_deleter {
         public:
+            
+            //! frees memory by calling delete[] on the pointer passed in
             template <typename Ty>
             static void free(Ty *p) O3_NOEXCEPT {
                 delete[] p;
@@ -25,6 +32,7 @@ namespace o3 {
         };
     } // END of namespace mem_free
     
+    //! http://www.boost.org/doc/libs/1_62_0/libs/smart_ptr/scoped_ptr.htm
     template <typename Ty>
     class scoped_ptr {
     public:
@@ -66,6 +74,7 @@ namespace o3 {
             return p_;
         }
         
+        //! gives up ownership of the pointer and returns it.
         element_type *release() O3_NOEXCEPT {
             element_type *p = p_;
             p_ = O3_NULLPTR;
@@ -109,8 +118,7 @@ namespace o3 {
     private:
         element_type *p_;
         
-        scoped_ptr(this_type const &);
-        this_type &operator=(this_type const &);
+        O3_DECLARE_NONCOPYABLE(scoped_ptr);
     }; // END of class scoped_ptr
     
     template <typename Ty>
@@ -118,6 +126,7 @@ namespace o3 {
         arg1.swap(arg2);
     }
     
+    //! http://www.boost.org/doc/libs/1_61_0/libs/smart_ptr/scoped_array.htm
     template <typename Ty>
     class scoped_array {
     public:
@@ -159,6 +168,7 @@ namespace o3 {
             return p_;
         }
     
+        //! gives up ownership of the pointer and returns it.
         element_type *release() O3_NOEXCEPT {
             element_type *p = p_;
             p_ = O3_NULLPTR;
@@ -218,6 +228,7 @@ namespace o3 {
         Ty *ref_;
     };
     
+    //! http://en.cppreference.com/w/cpp/memory/auto_ptr
     template <typename Ty>
     class auto_ptr {
     public:
