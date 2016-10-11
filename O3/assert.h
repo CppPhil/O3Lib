@@ -14,7 +14,7 @@
 //! checks a precondition; throws precondition_violation if the condition is false.
 #define O3_CHECK_PRE(cond) O3_DETAIL_BEGIN_MACRO \
     if (!(cond)) { \
-        throw o3::precondition_violation(std:string("O3: Precondition violation at ") + __FILE__ + ": " + O3_STRINGIFY(__LINE__)); \
+        throw o3::precondition_violation(std::string("O3: Precondition violation at ") + __FILE__ + ": " + O3_STRINGIFY(__LINE__)); \
     } O3_DETAIL_END_MACRO
 
 //! checks a postcondition; throw postcondition_violation if the condition is false.
