@@ -105,3 +105,10 @@ $RECYCLE.BIN/
 # Linux trash folder which might appear on any partition or disk
 .Trash-*
 
+BuildLog.htm
+*.dep
+*.embed.manifest
+*.res
+*.manifest
+*.idb
+*.vcproj

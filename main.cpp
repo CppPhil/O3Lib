@@ -90,6 +90,7 @@ SCENARIO("assertions can trigger", "assert.h") {
 SCENARIO("arrays can be used", "containers.h") {
     GIVEN("an array") {
         o3::array<int, 5> a = { 1, 2, 3, 4, 5 };
+
         WHEN("the array is copied") {
             o3::array<int, 5> a2(a);
             THEN("the arrays are equal") {
