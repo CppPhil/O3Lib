@@ -7,4 +7,4 @@
 		classname(classname const &); \
 		classname &operator=(classname const &)
 
-#endif //O3LIB_NONCOPYABLE_H
+#endif // O3LIB_NONCOPYABLE_H

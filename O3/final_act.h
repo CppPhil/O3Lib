@@ -26,4 +26,4 @@ namespace o3 {
     };
 } // END of namespace o3
 
-#endif //O3LIB_FINAL_ACT_H
+#endif // O3LIB_FINAL_ACT_H

@@ -13,4 +13,4 @@ typedef signed char byte;
 //! an unsigned byte-sized type
 typedef unsigned char ubyte;
 
-#endif //O3LIB_COMMON_H
+#endif // O3LIB_COMMON_H

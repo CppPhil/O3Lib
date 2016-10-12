@@ -20,4 +20,4 @@
 #   error "The compiler being used is not supported by O3Lib"
 #endif
 
-#endif //O3LIB_COMPILER_DETECTION_H
+#endif // O3LIB_COMPILER_DETECTION_H

@@ -23,4 +23,4 @@
         throw o3::postcondition_violation(std::string("O3: Postcondition violation at ") + __FILE__ + ": " + O3_STRINGIFY(__LINE__)); \
     } O3_DETAIL_END_MACRO
 
-#endif //O3LIB_ASSERT_H
+#endif // O3LIB_ASSERT_H

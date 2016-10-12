@@ -48,4 +48,4 @@ namespace o3 {
 //! null pointer literal; yields a prvalue expression of type o3::nullptr_t
 #define O3_NULLPTR  ((o3::nullptr_t()))
 
-#endif //O3LIB_NULLPTR_H
+#endif // O3LIB_NULLPTR_H

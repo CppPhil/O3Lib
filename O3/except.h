@@ -41,4 +41,4 @@ namespace o3 {
     O3_DECLARE_EXCEPTION_TYPE(bad_index, std::out_of_range);
 } // END of namespace o3
 
-#endif //O3LIB_EXCEPT_H
+#endif // O3LIB_EXCEPT_H

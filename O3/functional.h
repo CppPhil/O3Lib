@@ -29,4 +29,4 @@ namespace o3 {
     };
 } // END of namespace o3
 
-#endif //O3LIB_FUNCTIONAL_H
+#endif // O3LIB_FUNCTIONAL_H

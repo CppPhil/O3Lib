@@ -212,8 +212,7 @@ namespace o3 {
     private:
         element_type *p_;
     
-        scoped_array(this_type const &);
-        this_type &operator=(this_type const &);
+        O3_DECLARE_NONCOPYABLE(scoped_array);
     }; // END of class scoped_array
 
     template <typename Ty>
@@ -323,4 +322,4 @@ namespace o3 {
     
 } // END of namespace o3
 
-#endif //O3LIB_MEMORY_H
+#endif // O3LIB_MEMORY_H

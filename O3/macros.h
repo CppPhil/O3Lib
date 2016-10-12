@@ -89,4 +89,4 @@
 //! macro to annotate a function as returning a value that shall be checked at the callsite
 #define O3_CHECKRETURN
 
-#endif //O3LIB_MACROS_H
+#endif // O3LIB_MACROS_H

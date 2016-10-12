@@ -146,4 +146,4 @@ namespace o3 {
 #define O3_RBEGIN_REND(arg)   (o3::rbegin((arg)), o3::rend((arg)))
 #define O3_CRBEGIN_CREND(arg) (o3::crbegin((arg)), o3::crend((arg)))
 
-#endif //O3LIB_ITERATOR_H
+#endif // O3LIB_ITERATOR_H

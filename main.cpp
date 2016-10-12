@@ -87,5 +87,27 @@ SCENARIO("assertions can trigger", "assert.h") {
     }
 }
 
+SCENARIO("arrays can be used", "containers.h") {
+    GIVEN("an array") {
+        o3::array<int, 5> a = { 1, 2, 3, 4, 5 };
+        WHEN("the array is copied") {
+            o3::array<int, 5> a2(a);
+            THEN("the arrays are equal") {
+                REQUIRE(a == a2);
+                REQUIRE(a.at(0) == 1);
+                REQUIRE(a.at(1) == 2);
+                REQUIRE(a.at(2) == 3);
+                REQUIRE(a.at(3) == 4);
+                REQUIRE(a.at(4) == 5);
+                REQUIRE(a2.at(0) == 1);
+                REQUIRE(a2.at(1) == 2);
+                REQUIRE(a2.at(2) == 3);
+                REQUIRE(a2.at(3) == 4);
+                REQUIRE(a2.at(4) == 5);
+            }
+        }
+    }
+}
+
 
 
