@@ -6,5 +6,5 @@ var searchData=
   ['bit_5for',['bit_or',['../structo3_1_1bit__or.html',1,'o3']]],
   ['bit_5fxor',['bit_xor',['../structo3_1_1bit__xor.html',1,'o3']]],
   ['buf',['buf',['../structo3_1_1detail_1_1two__bytes.html#af5debd531b6ea077018ca62391fc6d9e',1,'o3::detail::two_bytes']]],
-  ['byte',['byte',['../common_8h.html#a331be856ee819bee7ec068d1236a3007',1,'common.h']]]
+  ['byte',['byte',['../namespaceo3.html#a3e9f25dee8b426f2874bb8439dfcc824',1,'o3']]]
 ];

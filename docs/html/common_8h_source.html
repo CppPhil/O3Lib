@@ -4,7 +4,7 @@
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.10"/>
-<title>O3Lib: C:/O3/common.h Source File</title>
+<title>O3Lib: C:/O3Lib/O3/common.h Source File</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -116,20 +116,23 @@ $(document).ready(function(){initNavTree('common_8h_source.html','');});
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">// include ciso646 so that standard C++ alternative operators are available even on MSVC</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;ciso646&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="common_8h.html#a331be856ee819bee7ec068d1236a3007">   11</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">char</span> <a class="code" href="common_8h.html#a331be856ee819bee7ec068d1236a3007">byte</a>;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="common_8h.html#a5dd4f281954ce1405c92d62a427f839a">   14</a></span>&#160;<span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="common_8h.html#a5dd4f281954ce1405c92d62a427f839a">ubyte</a>;</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#endif // O3LIB_COMMON_H</span></div>
-<div class="ttc" id="common_8h_html_a331be856ee819bee7ec068d1236a3007"><div class="ttname"><a href="common_8h.html#a331be856ee819bee7ec068d1236a3007">byte</a></div><div class="ttdeci">signed char byte</div><div class="ttdoc">a signed byte-sized type </div><div class="ttdef"><b>Definition:</b> <a href="common_8h_source.html#l00011">common.h:11</a></div></div>
-<div class="ttc" id="common_8h_html_a5dd4f281954ce1405c92d62a427f839a"><div class="ttname"><a href="common_8h.html#a5dd4f281954ce1405c92d62a427f839a">ubyte</a></div><div class="ttdeci">unsigned char ubyte</div><div class="ttdoc">an unsigned byte-sized type </div><div class="ttdef"><b>Definition:</b> <a href="common_8h_source.html#l00014">common.h:14</a></div></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace </span><a class="code" href="namespaceo3.html">o3</a> {</div>
+<div class="line"><a name="l00012"></a><span class="lineno"><a class="line" href="namespaceo3.html#a3e9f25dee8b426f2874bb8439dfcc824">   12</a></span>&#160;    <span class="keyword">typedef</span> <span class="keywordtype">signed</span> <span class="keywordtype">char</span> <a class="code" href="namespaceo3.html#a3e9f25dee8b426f2874bb8439dfcc824">byte</a>;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno"><a class="line" href="namespaceo3.html#ae50a7ae75dca5c360b25daf662271040">   15</a></span>&#160;    <span class="keyword">typedef</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> <a class="code" href="namespaceo3.html#ae50a7ae75dca5c360b25daf662271040">ubyte</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;} <span class="comment">// END of namespace o3</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor">#endif // O3LIB_COMMON_H</span></div>
+<div class="ttc" id="namespaceo3_html_ae50a7ae75dca5c360b25daf662271040"><div class="ttname"><a href="namespaceo3.html#ae50a7ae75dca5c360b25daf662271040">o3::ubyte</a></div><div class="ttdeci">unsigned char ubyte</div><div class="ttdoc">an unsigned byte-sized type </div><div class="ttdef"><b>Definition:</b> <a href="common_8h_source.html#l00015">common.h:15</a></div></div>
+<div class="ttc" id="namespaceo3_html_a3e9f25dee8b426f2874bb8439dfcc824"><div class="ttname"><a href="namespaceo3.html#a3e9f25dee8b426f2874bb8439dfcc824">o3::byte</a></div><div class="ttdeci">signed char byte</div><div class="ttdoc">a signed byte-sized type </div><div class="ttdef"><b>Definition:</b> <a href="common_8h_source.html#l00012">common.h:12</a></div></div>
 <div class="ttc" id="compiler__detection_8h_html"><div class="ttname"><a href="compiler__detection_8h.html">compiler_detection.h</a></div></div>
+<div class="ttc" id="namespaceo3_html"><div class="ttname"><a href="namespaceo3.html">o3</a></div><div class="ttdoc">define O3_NO_HASH_CONTAINERS to not have the unordered_map and unordered_set headers included ...</div><div class="ttdef"><b>Definition:</b> <a href="algorithm_8h_source.html#l00009">algorithm.h:9</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="dir_166b232db25027b727d8ce56e454b57b.html">O3</a></li><li class="navelem"><a class="el" href="common_8h.html">common.h</a></li>
+    <li class="navelem"><a class="el" href="dir_7294f3975b7d1fb115041ed08e8bbf5e.html">O3Lib</a></li><li class="navelem"><a class="el" href="dir_4d5d5974e0226083654d1ac601c9f855.html">O3</a></li><li class="navelem"><a class="el" href="common_8h.html">common.h</a></li>
     <li class="footer">Generated by
     <a href="http://www.doxygen.org/index.html">
     <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.10 </li>

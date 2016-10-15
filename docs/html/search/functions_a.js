@@ -17,5 +17,5 @@ var searchData=
   ['operator_3d_3d',['operator==',['../namespaceo3.html#a9f01d129483a859805f5e94426588cd2',1,'o3']]],
   ['operator_3e',['operator&gt;',['../namespaceo3.html#a99faef135f08781baec453934d66962d',1,'o3']]],
   ['operator_3e_3d',['operator&gt;=',['../namespaceo3.html#a898d6a9dfe1b9de5da9e0d372c817940',1,'o3']]],
-  ['operator_5b_5d',['operator[]',['../classo3_1_1array.html#a0e980d81722c62d1047d0308aea81d7e',1,'o3::array::operator[](size_type i)'],['../classo3_1_1array.html#ad63ffbecda0f65f7b16e4481cc50714f',1,'o3::array::operator[](size_type i) const ']]]
+  ['operator_5b_5d',['operator[]',['../classo3_1_1array.html#a0e980d81722c62d1047d0308aea81d7e',1,'o3::array::operator[](size_type i)'],['../classo3_1_1array.html#ad63ffbecda0f65f7b16e4481cc50714f',1,'o3::array::operator[](size_type i) const '],['../classo3_1_1scoped__array.html#a2a0bd742f43ff11d15e195212c5c31fd',1,'o3::scoped_array::operator[]()']]]
 ];

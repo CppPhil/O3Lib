@@ -9,6 +9,7 @@ var classo3_1_1scoped__array =
     [ "operator void *", "classo3_1_1scoped__array.html#a3fc28e120f13b433397a9aa90ed2356f", null ],
     [ "operator*", "classo3_1_1scoped__array.html#ae1a9a9672a820d7e873ff47ef8603c47", null ],
     [ "operator->", "classo3_1_1scoped__array.html#af01e77d83a75616ad3d7defcaa182599", null ],
+    [ "operator[]", "classo3_1_1scoped__array.html#a2a0bd742f43ff11d15e195212c5c31fd", null ],
     [ "release", "classo3_1_1scoped__array.html#a52919d967544bbf5ec644f736e600073", null ],
     [ "reset", "classo3_1_1scoped__array.html#ac2e6bc8a72f3a0ae41490d5fb202953e", null ],
     [ "swap", "classo3_1_1scoped__array.html#a843e8111f1c4b310d174f7950a2e46d8", null ],
