@@ -24,17 +24,17 @@ namespace o3 {
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE Ty *begin(Ty (&arr)[Num]) O3_NOEXCEPT {
         return arr;
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE Ty const *begin(Ty const (&arr)[Num]) O3_NOEXCEPT {
         return arr;
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE Ty const *cbegin(Ty const (&arr)[Num]) O3_NOEXCEPT {
         return arr;
-    };
+    }
     
     template <typename Cont>
     O3_FORCE_INLINE typename Cont::iterator end(Cont &cont) {
@@ -54,17 +54,17 @@ namespace o3 {
     template <typename Ty, std::size_t  Num>
     O3_FORCE_INLINE Ty *end(Ty (&arr)[Num]) O3_NOEXCEPT {
         return arr + Num;
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE Ty const *end(Ty const (&arr)[Num]) O3_NOEXCEPT {
         return arr + Num;
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE Ty const *cend(Ty const (&arr)[Num]) O3_NOEXCEPT {
         return arr + Num;
-    };
+    }
     
     template <typename Cont>
     O3_FORCE_INLINE typename Cont::reverse_iterator rbegin(Cont &cont) {
@@ -99,32 +99,32 @@ namespace o3 {
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE std::reverse_iterator<Ty *> rbegin(Ty (&arr)[Num]) {
         return std::reverse_iterator<Ty *>(arr + Num);
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE std::reverse_iterator<Ty const *>rbegin(Ty const (&arr)[Num]) {
         return std::reverse_iterator<Ty const *>(arr + Num);
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE std::reverse_iterator<Ty const *>crbegin(Ty const (&arr)[Num]) {
         return std::reverse_iterator<Ty const *>(arr + Num);
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE std::reverse_iterator<Ty *> rend(Ty (&arr)[Num]) {
         return std::reverse_iterator<Ty *>(arr);
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE std::reverse_iterator<Ty const *> rend(Ty const (&arr)[Num]) {
         return std::reverse_iterator<Ty const *>(arr);
-    };
+    }
     
     template <typename Ty, std::size_t Num>
     O3_FORCE_INLINE std::reverse_iterator<Ty const *> crend(Ty const (&arr)[Num]) {
         return std::reverse_iterator<Ty const *>(arr);
-    };
+    }
     
     template <typename ForwardIt>
     O3_SUGGEST_INLINE ForwardIt next(ForwardIt iter, typename std::iterator_traits<ForwardIt>::difference_type n = 1) {
